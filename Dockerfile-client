@@ -1,0 +1,8 @@
+FROM golang
+ADD . /go/src/github.com/kiyor/shadowsocks-go
+RUN cd /go/src/github.com/kiyor/shadowsocks-go/cmd/shadowsocks-client && \
+	go get && \
+	go install github.com/kiyor/shadowsocks-go/cmd/shadowsocks-client
+
+EXPOSE 1080
+ENTRYPOINT ["/go/bin/shadowsocks-client","-A","-b","0.0.0.0","-l","1080"]
